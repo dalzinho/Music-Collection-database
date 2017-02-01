@@ -1,4 +1,5 @@
 require_relative '../db/SqlRunner'
+require_relative './AlbumDetail'
 require 'pry-byebug'
 
 class Artist
@@ -23,8 +24,9 @@ class Artist
   end
 
   def all_albums()
-    sql = "SELECT * FROM albums WHERE artist_id = #{@artist_id};"
-    SqlRunner.run(sql).map { |album| Album.new(album)}
+    sql = "SELECT art.name, alb.title, alb.genre FROM artists art INNER JOIN albums alb ON art.artist_id = alb.artist_id WHERE alb.artist_id = #{@artist_id};"
+    SqlRunner.run(sql).map { |album| AlbumDetail.new(album) }
+    # SqlRunner.run(sql).map { |album| Album.new(album)}
   end
 
   def update()
@@ -43,4 +45,6 @@ class Artist
 
     return Artist.new(result)
   end
+
+
 end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

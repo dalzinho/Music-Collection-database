@@ -42,7 +42,7 @@ class Album
   end
 
   def self.get_by_id(album_id)
-    sql = "SELECT * FROM albums WHERE album_id = #{album_id.to_i}"
+    sql = "SELECT * FROM albums WHERE album_id = #{album_id}"
     result = SqlRunner.run(sql).first
     return Album.new(result)
   end
